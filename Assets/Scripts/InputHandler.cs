@@ -18,9 +18,15 @@ namespace SW
         public float mouseY;
 
         PlayerControls _inputActions;
+        CameraHandler _cameraHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
+
+        private void Awake()
+        {
+            _cameraHandler = CameraHandler.singleton;
+        }
 
         private void OnEnable()
         {
@@ -34,6 +40,18 @@ namespace SW
             }
 
             _inputActions.Enable();
+        }
+
+        private void FixedUpdate()
+        {
+            float delta = Time.fixedDeltaTime;
+
+            if (_cameraHandler != null)
+            {
+                _cameraHandler.FollowTarget(delta);
+                // inputAction에서 가져온 마우스 x, y값 넣어줌
+                _cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
+            }
         }
 
         private void OnDisable()

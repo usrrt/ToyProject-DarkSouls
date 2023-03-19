@@ -21,7 +21,7 @@ namespace SW
         [HideInInspector]
         public AnimatorHandler animatorHandler;
 
-        public new Rigidbody rigidbody; // ?
+        public new Rigidbody rigidbody;
         public GameObject normalCamera; // 나중에 락온카메라의 역할을 한다
 
         [Header("Stats")]
@@ -48,6 +48,7 @@ namespace SW
             moveDirection = _cameraObject.forward * _inputHandler.vertical;
             moveDirection += _cameraObject.right * _inputHandler.horizontal;
             moveDirection.Normalize(); // 방향정보만 필요하므로 정규화 작업(안할시 대각선으로 움직일때 더 빨라짐)
+            moveDirection.y = 0; // 캐릭터가 공중부양하는 현상 방지
 
             float speed = _movementSpeed;
             moveDirection *= speed;
