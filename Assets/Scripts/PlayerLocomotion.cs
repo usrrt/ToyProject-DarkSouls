@@ -31,7 +31,7 @@ namespace SW
         private void Start()
         {
             _cameraObject = Camera.main.transform;
-            _inputHandler = GetComponent<InputHandler>(); // awake가아닌 start에서 초기화한이유는 inputHandler onEnable에서 inputAction을 생성하고있기 때문이다 Awake -> OnEnable -> Start
+            _inputHandler = GetComponent<InputHandler>(); 
             myTransform = transform;
             rigidbody = GetComponent<Rigidbody>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -48,7 +48,7 @@ namespace SW
             moveDirection = _cameraObject.forward * _inputHandler.vertical;
             moveDirection += _cameraObject.right * _inputHandler.horizontal;
             moveDirection.Normalize(); // 방향정보만 필요하므로 정규화 작업(안할시 대각선으로 움직일때 더 빨라짐)
-            moveDirection.y = 0; // 캐릭터가 공중부양하는 현상 방지
+            moveDirection.y = 0; // 캐릭터가 카메라를 바라보면서 다가올때 공중부양하는 현상 방지
 
             float speed = _movementSpeed;
             moveDirection *= speed;
