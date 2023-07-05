@@ -13,7 +13,6 @@ namespace SW
         // ###############################################
 
         PlayerControls inputActions;
-        CameraHandler cameraHandler;
 
         public float horizontal;
         public float vertical;
@@ -25,15 +24,9 @@ namespace SW
         public bool rollFlag;
         public bool sprintFlag;
         public float rollInputTimer;
-        public bool isInteracting;
 
         Vector2 movementInput;
         Vector2 cameraInput;
-
-        private void Awake()
-        {
-            cameraHandler = CameraHandler.singleton;
-        }
 
         private void OnEnable()
         {
@@ -49,18 +42,6 @@ namespace SW
             }
 
             inputActions.Enable();
-        }
-
-        private void FixedUpdate()
-        {
-            float delta = Time.fixedDeltaTime;
-
-            if (cameraHandler != null)
-            {
-                cameraHandler.FollowTarget(delta);
-                // inputAction에서 가져온 마우스 x, y값 넣어줌
-                cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-            }
         }
 
         private void OnDisable()

@@ -13,6 +13,7 @@ namespace SW
 
         Transform cameraObject; // main 카메라의 위치값을 저장
         InputHandler inputHandler;
+        PlayerManager manager;
 
         Vector3 moveDirection;
 
@@ -35,8 +36,6 @@ namespace SW
         [SerializeField]
         float rotationSpeed = 10f;
 
-        public bool isSprinting;
-
         private void Awake()
         {
             cameraObject = Camera.main.transform;
@@ -44,17 +43,8 @@ namespace SW
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             animatorHandler.Init();
             rigidbody = GetComponent<Rigidbody>();
+            manager = GetComponent<PlayerManager>();
             myTransform = transform;
-        }
-
-        private void Update()
-        {
-            float delta = Time.deltaTime;
-
-            isSprinting = inputHandler.b_Input; // 버튼을 뗄 경우 isSprinting을 다시 false로 바꾼다
-            inputHandler.TickInput(delta);
-            HandleMovement(delta);
-            HandleRollingAndSprinting(delta);
         }
 
         #region Movement
@@ -92,7 +82,7 @@ namespace SW
             myTransform.rotation = targetRotation;
         }
 
-        private void HandleMovement(float delta)
+        public void HandleMovement(float delta)
         {
             if (inputHandler.rollFlag)
                 return;
@@ -115,7 +105,7 @@ namespace SW
             if (inputHandler.sprintFlag)
             {
                 speed = sprintSpeed;
-                isSprinting = true;
+                manager.isSprinting = true;
             }
             moveDirection *= speed;
 
@@ -123,7 +113,7 @@ namespace SW
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             rigidbody.velocity = projectedVelocity;
 
-            animatorHandler.UpdateAnimatorValues(0, inputHandler.moveAmount, isSprinting); // 블랜드트리 value값 변화
+            animatorHandler.UpdateAnimatorValues(0, inputHandler.moveAmount, manager.isSprinting); // 블랜드트리 value값 변화
 
             if (animatorHandler.canRotate)
             {

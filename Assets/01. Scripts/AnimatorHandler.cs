@@ -11,9 +11,11 @@ namespace SW
         //             MAIL : gkenfktm@gmail.com
         // ###############################################
 
+        PlayerManager manager;
+        InputHandler inputHandler;
+        PlayerLocomotion locomotion;
+
         public Animator anim;
-        public InputHandler inputHandler;
-        public PlayerLocomotion locomotion;
 
         public bool canRotate;
 
@@ -25,6 +27,7 @@ namespace SW
             anim = GetComponent<Animator>();
             inputHandler = GetComponentInParent<InputHandler>();
             locomotion = GetComponentInParent<PlayerLocomotion>();
+            manager = GetComponentInParent<PlayerManager>();
 
             // string으로 호출하면 간편하지만 매번 문자열에서 해시로 변환하기에 성능이 떨어진다 따라서 int값으로 캐싱해놓고 쓰는게 좋음
             horizontal = Animator.StringToHash("Horizontal");
@@ -122,7 +125,7 @@ namespace SW
         private void OnAnimatorMove()
         {
             // 애니메이션에 의해 캐릭터 움직임 제어는 상호작용 중일때만 가능하게 한다
-            if (inputHandler.isInteracting == false)
+            if (manager.isInteracting == false)
                 return;
 
             float delta = Time.deltaTime;
