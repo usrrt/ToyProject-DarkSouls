@@ -30,7 +30,12 @@ namespace SW
         float movementSpeed = 5f;
 
         [SerializeField]
+        float sprintSpeed = 7f;
+
+        [SerializeField]
         float rotationSpeed = 10f;
+
+        public bool isSprinting;
 
         private void Awake()
         {
@@ -46,6 +51,7 @@ namespace SW
         {
             float delta = Time.deltaTime;
 
+            isSprinting = inputHandler.b_Input; // 버튼을 뗄 경우 isSprinting을 다시 false로 바꾼다
             inputHandler.TickInput(delta);
             HandleMovement(delta);
             HandleRollingAndSprinting(delta);
@@ -88,6 +94,9 @@ namespace SW
 
         private void HandleMovement(float delta)
         {
+            if (inputHandler.rollFlag)
+                return;
+
             // 카메라의 전방향으로 입력값을 곱한뒤 저장
             // 캐릭터가 카메라 방향으로 움직일수있다
             moveDirection = cameraObject.forward * inputHandler.vertical;
@@ -102,13 +111,19 @@ namespace SW
             moveDirection.y = 0; // 캐릭터가 카메라를 바라보면서 다가올때 공중부양하는 현상 방지
 
             float speed = movementSpeed;
+
+            if (inputHandler.sprintFlag)
+            {
+                speed = sprintSpeed;
+                isSprinting = true;
+            }
             moveDirection *= speed;
 
             // 평면에 벡터를 투영해 이동속도를 평면에 맞게 조정하는 작업
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             rigidbody.velocity = projectedVelocity;
 
-            animatorHandler.UpdateAnimatorValues(0, inputHandler.moveAmount); // 블랜드트리 value값 변화
+            animatorHandler.UpdateAnimatorValues(0, inputHandler.moveAmount, isSprinting); // 블랜드트리 value값 변화
 
             if (animatorHandler.canRotate)
             {

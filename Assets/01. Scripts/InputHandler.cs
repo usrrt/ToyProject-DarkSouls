@@ -23,6 +23,8 @@ namespace SW
 
         public bool b_Input;
         public bool rollFlag;
+        public bool sprintFlag;
+        public float rollInputTimer;
         public bool isInteracting;
 
         Vector2 movementInput;
@@ -88,7 +90,18 @@ namespace SW
 
             if (b_Input)
             {
-                rollFlag = true;
+                rollInputTimer += Time.deltaTime;
+                sprintFlag = true;
+            }
+            else
+            {
+                // 버튼을 짧게 누른 경우(0 ~ 0.5초)
+                if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+                {
+                    sprintFlag = false;
+                    rollFlag = true;
+                }
+                rollInputTimer = 0;
             }
         }
     }

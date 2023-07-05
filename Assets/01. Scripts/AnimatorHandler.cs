@@ -31,7 +31,11 @@ namespace SW
             vertical = Animator.StringToHash("Vertical");
         }
 
-        public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement)
+        public void UpdateAnimatorValues(
+            float horizontalMovement,
+            float verticalMovement,
+            bool isSprinting
+        )
         {
             #region Vertical
             float v = 0;
@@ -84,6 +88,12 @@ namespace SW
             }
             #endregion
 
+            if (isSprinting)
+            {
+                v = 2;
+                h = horizontalMovement;
+            }
+
             anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
@@ -107,16 +117,27 @@ namespace SW
             canRotate = false;
         }
 
+        // Animator컴포넌트에 의해 Root Motion이 처리되는 모든 프레임에 호출
+        // Apply Root Motion 체크박스 활성화상태에서 동작
         private void OnAnimatorMove()
         {
+            // 애니메이션에 의해 캐릭터 움직임 제어는 상호작용 중일때만 가능하게 한다
             if (inputHandler.isInteracting == false)
                 return;
 
             float delta = Time.deltaTime;
+
+            // drag를 0으로 설정하여 마찰이나 공기저항 같은 외부 요인이 캐릭터 움직임에 영항을 주는것 방지
             locomotion.rigidbody.drag = 0;
+
+            // 애니메이션에 의해 이루어진 이동거리 저장
             Vector3 deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
+
+            // 이동한 거리를 델타타임으로 나눠 프레임당 캐릭터가 얻게 될 속도를 계산한다
             Vector3 vel = deltaPosition / delta;
+
+            // 속도를 캐릭터 rigidbody에 적용시켜 애니메이션에 의한 이동이 실제 캐릭터의 움직임으로 반영되게 한다
             locomotion.rigidbody.velocity = vel;
         }
     }
