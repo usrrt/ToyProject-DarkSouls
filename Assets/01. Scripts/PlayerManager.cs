@@ -2,56 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SW
+public class PlayerManager : MonoBehaviour
 {
-    public class PlayerManager : MonoBehaviour
+    PlayerLocomotion locomotion;
+    InputHandler inputHandler;
+    Animator anim;
+    CameraHandler cameraHandler;
+
+    public bool isInteracting;
+
+    [Header("Player Flags")]
+    public bool isSprinting;
+    public bool isInAir;
+    public bool isGrounded;
+    public bool canDoCombo;
+
+    private void Awake()
     {
-        PlayerLocomotion locomotion;
-        InputHandler inputHandler;
-        Animator anim;
-        CameraHandler cameraHandler;
+        inputHandler = GetComponent<InputHandler>();
+        anim = GetComponentInChildren<Animator>();
+        locomotion = GetComponent<PlayerLocomotion>();
+    }
 
-        public bool isInteracting;
+    private void Start()
+    {
+        cameraHandler = FindObjectOfType<CameraHandler>();
+    }
 
-        [Header("Player Flags")]
-        public bool isSprinting;
+    private void Update()
+    {
+        float delta = Time.deltaTime;
 
-        private void Awake()
+        isInteracting = anim.GetBool("isInteracting");
+        canDoCombo = anim.GetBool("canDoCombo");
+
+        inputHandler.TickInput(delta);
+        locomotion.HandleMovement(delta);
+        locomotion.HandleRollAndSprintAnim(delta);
+        locomotion.HandleFalling(delta, locomotion.moveDirection);
+    }
+
+    private void FixedUpdate()
+    {
+        float delta = Time.fixedDeltaTime;
+        if (cameraHandler != null)
         {
-            cameraHandler = CameraHandler.singleton;
-            inputHandler = GetComponent<InputHandler>();
-            anim = GetComponentInChildren<Animator>();
-            locomotion = GetComponent<PlayerLocomotion>();
+            cameraHandler.FollowTarget(delta);
+            cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
         }
+    }
 
-        private void Update()
+    private void LateUpdate()
+    {
+        inputHandler.rollFlag = false;
+        inputHandler.sprintFlag = false;
+        inputHandler.rb_Input = false;
+        inputHandler.rt_Input = false;
+
+        if (isInAir)
         {
-            float delta = Time.deltaTime;
-
-            isInteracting = anim.GetBool("isInteracting");
-
-            inputHandler.TickInput(delta);
-            locomotion.HandleMovement(delta);
-            locomotion.HandleRollingAndSprinting(delta);
-        }
-
-        private void FixedUpdate()
-        {
-            float delta = Time.fixedDeltaTime;
-
-            if (cameraHandler != null)
-            {
-                cameraHandler.FollowTarget(delta);
-                // inputAction에서 가져온 마우스 x, y값 넣어줌
-                cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
-            }
-        }
-
-        private void LateUpdate()
-        {
-            inputHandler.rollFlag = false;
-            inputHandler.sprintFlag = false;
-            isSprinting = inputHandler.b_Input; // 버튼을 뗄 경우 isSprinting을 다시 false로 바꾼다
+            locomotion.inAirTimer += Time.deltaTime;
         }
     }
 }
