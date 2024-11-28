@@ -24,14 +24,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664508612266377523}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5163027, y: -0.4831475, z: 0.4831475, w: -0.5163027}
+  m_LocalRotation: {x: 0.49473667, y: -0.4601668, z: 0.5052085, w: -0.536886}
   m_LocalPosition: {x: 0.11, y: 0.03, z: -0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8709021055547092786}
   m_Father: {fileID: 2800969143599735582}
-  m_LocalEulerAnglesHint: {x: -3.8, y: 90, z: 270}
+  m_LocalEulerAnglesHint: {x: -3.8, y: 85, z: 270}
 --- !u!1 &3284489945496418724
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,8 +168,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.045600895, y: 0.67229366, z: 0.24240443}
-  m_Center: {x: 0.0002032295, y: 0.56039405, z: 0.00015120207}
+  m_Size: {x: 0.045600895, y: 0.79998785, z: 0.24240443}
+  m_Center: {x: 0.00020322965, y: 0.4965491, z: 0.00015112669}
 --- !u!114 &2583778162223055614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,3 +182,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a7457b882558fb44a4168bfdffb68f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDamage: 0
