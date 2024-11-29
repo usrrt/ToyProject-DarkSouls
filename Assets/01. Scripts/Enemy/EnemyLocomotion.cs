@@ -7,63 +7,25 @@ public class EnemyLocomotion : MonoBehaviour
 {
     EnemyManager enemyManager;
     EnemyAnimator enemyAnim;
-    NavMeshAgent navMeshAgent;
-    public Rigidbody enemyRigid;
-
-    public CharacterStats currentTargetCharacter;
-
-    public float distFromTarget;
-    public float stoppingDist = 1f;
-    public float rotationSpeed = 20f;
 
     private void Awake()
     {
         enemyManager = GetComponent<EnemyManager>();
         enemyAnim = GetComponentInChildren<EnemyAnimator>();
-        navMeshAgent = GetComponentInChildren<NavMeshAgent>();
-        enemyRigid = GetComponent<Rigidbody>();
+        //enemyRigid = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        navMeshAgent.enabled = false;
-        enemyRigid.isKinematic = false;
+        //enemyRigid.isKinematic = false;
     }
 
-    public void HandleCurrentAction()
-    {
-        if ((currentTargetCharacter != null))
-        {
-            distFromTarget = Vector3.Distance(
-                currentTargetCharacter.transform.position,
-                transform.position
-            );
-        }
-        if (currentTargetCharacter == null)
-        {
-            HandleDetection();
-        }
-        else
-        {
-            HandleMoveToTarget();
-            if (distFromTarget <= stoppingDist)
-            {
-                enemyManager.AttackTarget();
-            }
-        }
-        //else if (distFromTarget > stoppingDist)
-        //{
-        //    //HandleMoveToTarget();
-        //}
-        //else if (distFromTarget <= stoppingDist)
-        //{
-        //    // attack
-        //    //enemyManager.AttackTarget();
-        //}
-    }
+
 
     private void HandleDetection()
     {
+        /* IDLE
+        
         // 특정 레이어를 감지 -> 충돌체가 CharacterStats을 가지는지 확인 -> 우호관계인지 확인 -> 시야내에 있는지 확인 -> 대상목록에 추가
         Collider[] cols = Physics.OverlapSphere(
             transform.position,
@@ -91,53 +53,55 @@ public class EnemyLocomotion : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     private void HandleMoveToTarget()
     {
+        ////if (enemyManager.isPerformingAction)
+        ////    return;
+
+        //Vector3 targetDir = enemyManager.currentTargetCharacter.transform.position - transform.position;
+        //distFromTarget = Vector3.Distance(
+        //    enemyManager.currentTargetCharacter.transform.position,
+        //    transform.position
+        //);
+        //float viewableAngle = Vector3.Angle(targetDir, transform.forward);
+
+        //// 동작 실행중엔 움직임을 멈춘다
         //if (enemyManager.isPerformingAction)
-        //    return;
+        //{
+        //    enemyAnim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        //    navMeshAgent.enabled = false;
+        //}
+        //else
+        //{
+            
+        //    if (distFromTarget > stoppingDist)
+        //    {
+               
+        //        enemyAnim.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
+        //    }
+        //    else if (distFromTarget <= stoppingDist)
+        //    {
+               
+        //        enemyAnim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+        //    }
+        //}
 
-        Vector3 targetDir = currentTargetCharacter.transform.position - transform.position;
-        distFromTarget = Vector3.Distance(
-            currentTargetCharacter.transform.position,
-            transform.position
-        );
-        float viewableAngle = Vector3.Angle(targetDir, transform.forward);
+        //HandleRotateTowardsTarget();
 
-        // 동작 실행중엔 움직임을 멈춘다
-        if (enemyManager.isPerformingAction)
-        {
-            enemyAnim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-            navMeshAgent.enabled = false;
-        }
-        else
-        {
-            Debug.Log("1111111111111111111111");
-            if (distFromTarget > stoppingDist)
-            {
-                Debug.Log("222222222222222222");
-                enemyAnim.anim.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
-            }
-            else if (distFromTarget <= stoppingDist)
-            {
-                Debug.Log("3333333333333333");
-                enemyAnim.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
-            }
-        }
-
-        HandleRotateTowardsTarget();
-
-        navMeshAgent.transform.localPosition = Vector3.zero;
-        navMeshAgent.transform.localRotation = Quaternion.identity;
+        //navMeshAgent.transform.localPosition = Vector3.zero;
+        //navMeshAgent.transform.localRotation = Quaternion.identity;
     }
 
     private void HandleRotateTowardsTarget()
     {
+        /*
         // 수동 회전
         if (enemyManager.isPerformingAction)
         {
-            Vector3 dir = currentTargetCharacter.transform.position - transform.position;
+            Vector3 dir = enemyManager.currentTargetCharacter.transform.position - transform.position;
             dir.y = 0;
             dir.Normalize();
 
@@ -158,7 +122,7 @@ public class EnemyLocomotion : MonoBehaviour
             Vector3 targetVel = enemyRigid.velocity;
 
             navMeshAgent.enabled = true;
-            navMeshAgent.SetDestination(currentTargetCharacter.transform.position);
+            navMeshAgent.SetDestination(enemyManager.currentTargetCharacter.transform.position);
             enemyRigid.velocity = targetVel;
             transform.rotation = Quaternion.Slerp(
                 transform.rotation,
@@ -166,5 +130,6 @@ public class EnemyLocomotion : MonoBehaviour
                 rotationSpeed / Time.deltaTime
             );
         }
+        */
     }
 }

@@ -1,16 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyManager : CharacterManager
 {
     EnemyLocomotion locomotion;
     EnemyAnimator enemyAnim;
+    EnemyStats enemyStats;
+
+    public Rigidbody enemyRigid;
+    public NavMeshAgent navMeshAgent;
+    public float distFromTarget;
+    public float stoppingDist = 1f;
+    public float rotationSpeed = 20f;
+
+    //public EnemyAttackAction[] enemyAttacks;
+    //public EnemyAttackAction currentAttack;
+    public State currentState; // 첫 시작은 IDLE STATE로 시작한다
+    public CharacterStats currentTargetCharacter;
 
     public bool isPerformingAction; // ai의 행동 수행 여부 확인
-
-    public EnemyAttackAction[] enemyAttacks;
-    public EnemyAttackAction currentAttack;
 
     [Header("AI Setting")]
     public float detectionRadius = 20;
@@ -18,22 +29,44 @@ public class EnemyManager : CharacterManager
     public float minDetectionAngle = -50f;
     public float currentRecoveryTime;
 
-    public LayerMask detectionLayer;
+    
 
     private void Awake()
     {
         locomotion = GetComponent<EnemyLocomotion>();
         enemyAnim = GetComponentInChildren<EnemyAnimator>();
+        enemyStats = GetComponent<EnemyStats>();
+        navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+        enemyRigid = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Start()
     {
-        locomotion.HandleCurrentAction();
+        navMeshAgent.enabled = false;
     }
 
     private void Update()
     {
+        HandleStateMachine();
         HandleRecoveryTimer();
+    }
+
+    // 상태 업데이트를 위해 코드를 계속 실행하면서 타겟을 탐색하고 따라다니며 공격범위를 알려주고 다음 상태로 전환되는 식으로 진행된다
+    private void HandleStateMachine()
+    {
+        if (currentState != null)
+        {
+            State nextState = currentState.Tick(this, enemyStats, enemyAnim);
+            if (nextState != null)
+            {
+                SwitchNextStete(nextState);
+            }
+        }
+    }
+
+    private void SwitchNextStete(State state)
+    {
+        currentState = state;
     }
 
     public void HandleRecoveryTimer()
@@ -54,6 +87,7 @@ public class EnemyManager : CharacterManager
 
     public void AttackTarget()
     {
+        /* OLD CODE
         if (isPerformingAction)
             return;
 
@@ -68,10 +102,13 @@ public class EnemyManager : CharacterManager
             enemyAnim.PlayTargetAnimation(currentAttack.actionAnimation, true);
             currentAttack = null; // 공격을 재설정하지않으면 동일한공격을 계속 반복
         }
+         */
+
     }
 
     public void GetNewAttack()
     {
+        /* OLD CODE
         Vector3 targetDir =
             locomotion.currentTargetCharacter.transform.position - transform.position;
         float viewableAngle = Vector3.Angle(targetDir, transform.forward);
@@ -131,5 +168,8 @@ public class EnemyManager : CharacterManager
                 }
             }
         }
+
+        */
+
     }
 }
