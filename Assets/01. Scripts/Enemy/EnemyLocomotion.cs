@@ -12,15 +12,7 @@ public class EnemyLocomotion : MonoBehaviour
     {
         enemyManager = GetComponent<EnemyManager>();
         enemyAnim = GetComponentInChildren<EnemyAnimator>();
-        //enemyRigid = GetComponent<Rigidbody>();
     }
-
-    private void Start()
-    {
-        //enemyRigid.isKinematic = false;
-    }
-
-
 
     private void HandleDetection()
     {
@@ -95,41 +87,5 @@ public class EnemyLocomotion : MonoBehaviour
         //navMeshAgent.transform.localRotation = Quaternion.identity;
     }
 
-    private void HandleRotateTowardsTarget()
-    {
-        /*
-        // 수동 회전
-        if (enemyManager.isPerformingAction)
-        {
-            Vector3 dir = enemyManager.currentTargetCharacter.transform.position - transform.position;
-            dir.y = 0;
-            dir.Normalize();
 
-            if (dir == Vector3.zero)
-                dir = transform.forward;
-
-            Quaternion targetRotation = Quaternion.LookRotation(dir);
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                targetRotation,
-                rotationSpeed / Time.deltaTime
-            );
-        }
-        // 길찾기(navmesh)를 통한 회전
-        else
-        {
-            Vector3 relativeDir = transform.InverseTransformDirection(navMeshAgent.desiredVelocity);
-            Vector3 targetVel = enemyRigid.velocity;
-
-            navMeshAgent.enabled = true;
-            navMeshAgent.SetDestination(enemyManager.currentTargetCharacter.transform.position);
-            enemyRigid.velocity = targetVel;
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                navMeshAgent.transform.rotation,
-                rotationSpeed / Time.deltaTime
-            );
-        }
-        */
-    }
 }

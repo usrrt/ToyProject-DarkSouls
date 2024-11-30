@@ -3729,8 +3729,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -3738,6 +3738,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &110522898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9786,6 +9787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d7e83283a3fc84ba679a9366bba3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatStanceState: {fileID: 416279516}
 --- !u!1 &307222840
 GameObject:
   m_ObjectHideFlags: 0
@@ -11016,8 +11018,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -11025,6 +11027,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &359725099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12719,8 +12722,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 195851731}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 1
@@ -12728,6 +12731,7 @@ MonoBehaviour:
   maxDetectionAngle: 50
   minDetectionAngle: -50
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &405934186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13104,6 +13108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85013c16b253dde4e9719b710d06c150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackState: {fileID: 1513139321}
+  pursueState: {fileID: 304506137}
 --- !u!1 &416423394
 GameObject:
   m_ObjectHideFlags: 0
@@ -28252,8 +28258,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -28261,6 +28267,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &717246403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29084,8 +29091,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -29093,6 +29100,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &742091367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32150,8 +32158,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -32159,6 +32167,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &829098471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33333,8 +33342,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -33342,6 +33351,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &868486773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54424,8 +54434,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -54433,6 +54443,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &1404355867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57590,6 +57601,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8340b7b9eb9e04e43bb032f7b918bfe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatStanceState: {fileID: 416279516}
+  enemyAttacks:
+  - {fileID: 11400000, guid: 3acb914427cdb484fa1a150fb6c918c8, type: 2}
+  - {fileID: 11400000, guid: 339c415029f623b4d8d0f90ba1f1faa1, type: 2}
+  - {fileID: 11400000, guid: 4b7f8341c2562d94ab16f3769396bb79, type: 2}
+  currentAttack: {fileID: 0}
 --- !u!1 &1513411426
 GameObject:
   m_ObjectHideFlags: 0
@@ -58199,8 +58216,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -58208,6 +58225,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &1524749579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59830,8 +59848,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -59839,6 +59857,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &1581083442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61856,8 +61875,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -61865,6 +61884,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &1640959480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62258,8 +62278,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -62267,6 +62287,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &1647693818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67280,8 +67301,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -67289,6 +67310,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &1808129924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73038,8 +73060,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -73047,6 +73069,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &1996551492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74088,8 +74111,8 @@ MonoBehaviour:
   enemyRigid: {fileID: 0}
   navMeshAgent: {fileID: 0}
   distFromTarget: 0
-  stoppingDist: 1
   rotationSpeed: 20
+  maxAttackRange: 1.5
   currentState: {fileID: 0}
   currentTargetCharacter: {fileID: 0}
   isPerformingAction: 0
@@ -74097,6 +74120,7 @@ MonoBehaviour:
   maxDetectionAngle: 0
   minDetectionAngle: 0
   currentRecoveryTime: 0
+  viewableAngle: 0
 --- !u!114 &2040743286
 MonoBehaviour:
   m_ObjectHideFlags: 0

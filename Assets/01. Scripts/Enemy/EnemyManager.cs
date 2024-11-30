@@ -13,8 +13,8 @@ public class EnemyManager : CharacterManager
     public Rigidbody enemyRigid;
     public NavMeshAgent navMeshAgent;
     public float distFromTarget;
-    public float stoppingDist = 1f;
     public float rotationSpeed = 20f;
+    public float maxAttackRange = 1.5f;
 
     //public EnemyAttackAction[] enemyAttacks;
     //public EnemyAttackAction currentAttack;
@@ -28,6 +28,7 @@ public class EnemyManager : CharacterManager
     public float maxDetectionAngle = 50f;
     public float minDetectionAngle = -50f;
     public float currentRecoveryTime;
+    public float viewableAngle;
 
     
 
@@ -85,91 +86,5 @@ public class EnemyManager : CharacterManager
         }
     }
 
-    public void AttackTarget()
-    {
-        /* OLD CODE
-        if (isPerformingAction)
-            return;
 
-        if (currentAttack == null)
-        {
-            GetNewAttack();
-        }
-        else
-        {
-            isPerformingAction = true;
-            currentRecoveryTime = currentAttack.recoveryTime;
-            enemyAnim.PlayTargetAnimation(currentAttack.actionAnimation, true);
-            currentAttack = null; // 공격을 재설정하지않으면 동일한공격을 계속 반복
-        }
-         */
-
-    }
-
-    public void GetNewAttack()
-    {
-        /* OLD CODE
-        Vector3 targetDir =
-            locomotion.currentTargetCharacter.transform.position - transform.position;
-        float viewableAngle = Vector3.Angle(targetDir, transform.forward);
-        locomotion.distFromTarget = Vector3.Distance(
-            locomotion.currentTargetCharacter.transform.position,
-            transform.position
-        );
-
-        int maxScore = 0;
-
-        for (int i = 0; i < enemyAttacks.Length; i++)
-        {
-            EnemyAttackAction attackAction = enemyAttacks[i];
-
-            if (
-                locomotion.distFromTarget <= attackAction.maxDistToAttack
-                && locomotion.distFromTarget >= attackAction.minDistToAttack
-            )
-            {
-                if (
-                    viewableAngle <= attackAction.maxAttackAngle
-                    && viewableAngle >= attackAction.minAttackAngle
-                )
-                {
-                    maxScore += attackAction.attackScore;
-                }
-            }
-        }
-
-        int randomValue = Random.Range(0, maxScore);
-        int tempScore = 0;
-
-        for (int i = 0; i < enemyAttacks.Length; i++)
-        {
-            EnemyAttackAction attackAction = enemyAttacks[i];
-
-            if (
-                locomotion.distFromTarget <= attackAction.maxDistToAttack
-                && locomotion.distFromTarget >= attackAction.minDistToAttack
-            )
-            {
-                if (
-                    viewableAngle <= attackAction.maxAttackAngle
-                    && viewableAngle >= attackAction.minAttackAngle
-                )
-                {
-                    if (currentAttack != null)
-                        return;
-
-                    tempScore += attackAction.attackScore;
-
-                    if (tempScore > randomValue)
-                    {
-                        currentAttack = attackAction;
-                        Debug.Log(currentAttack);
-                    }
-                }
-            }
-        }
-
-        */
-
-    }
 }

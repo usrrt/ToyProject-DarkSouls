@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class EnemyAnimator : AnimatorManager
 {
-    EnemyLocomotion locomotion;
     EnemyManager manager;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        locomotion = GetComponentInParent<EnemyLocomotion>();
         manager = GetComponentInParent<EnemyManager>();
     }
 
